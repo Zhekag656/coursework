@@ -1,7 +1,7 @@
 const sequelize = require('../db')
 const {DataTypes} = require('sequelize')
 
-const User = sequelize.define('user', {
+const User = sequelize.define('User', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email: {type: DataTypes.STRING, required: true},
     password: {type: DataTypes.STRING, required: true},
@@ -9,7 +9,7 @@ const User = sequelize.define('user', {
     activationLink: {type: DataTypes.STRING},
 })
 
-const Token = sequelize.define('token', {
+const Token = sequelize.define('Token', {
     refreshToken: {type: DataTypes.STRING, required: true},
     userId: {type: DataTypes.INTEGER, required: true, references: {
         model: 'Users',
@@ -18,7 +18,7 @@ const Token = sequelize.define('token', {
 })
 
 
-Token.belongsTo(User)
+Token.belongsTo(User, {foreignKey: 'userId'})
 
 module.exports = {
     User,
