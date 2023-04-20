@@ -7,7 +7,7 @@ const UserDto = require('../dtos/userDto')
 
 class UserService{
     async registration(email, password){
-        const candidate = await models.User.findOne({email})
+        const candidate = await models.User.findOne({where: {email}})
 
         if (candidate){
             throw new Error(`User with ${email} already exists`)
@@ -22,7 +22,7 @@ class UserService{
         await mailService.sendActivationMail(email, activationLink)
 
         const userDto = new UserDto(user)
-        const tokens = tokenService.generateTokens({...userDto})
+        const tokens = tokenService.generateTokens({userId: userDto.id})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
         return {...tokens, user: userDto}
