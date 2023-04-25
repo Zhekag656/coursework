@@ -73,12 +73,5 @@ export default class Store{
 
     }
 
-    async checkActivation(){
-        try {
 
-        } catch (err) {
-            // @ts-ignore
-            console.log(err.response?.data?.message)
-        }
-    }
 }

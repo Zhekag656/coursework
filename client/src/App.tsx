@@ -1,7 +1,7 @@
 import React, {FC, useContext, useEffect} from "react";
-import LoginForm from "./components/LoginForm";
 import {Context} from "./index";
 import {observer} from "mobx-react-lite";
+import LoginForm from "./components/LoginForm";
 
 const App: FC = () => {
 
@@ -14,14 +14,11 @@ const App: FC = () => {
     }, [])
 
     if (!store.isAuth){
-        console.log("no auth")
         return (
             <LoginForm/>
         )
     }
 
-
-    console.log("auth")
     // @ts-ignore
     return (
         <div>
